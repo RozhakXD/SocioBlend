@@ -144,7 +144,7 @@ def Main() -> None:
 if __name__ == "__main__":
     try:
         if os.path.exists("Penyimpanan/Subscribe.json") == False:
-            os.system(f"xdg-open {json.loads(requests.get('https://raw.githubusercontent.com/RozhakXD/Like4Gram/main/Penyimpanan/Youtube.json').text)['Link']}")
+            os.system(f"xdg-open {json.loads(requests.get('https://raw.githubusercontent.com/RozhakXD/SocioBlend/refs/heads/main/Penyimpanan/Youtube.json').text)['Link']}")
             with open('Penyimpanan/Subscribe.json', 'w') as w:
                 w.write(json.dumps(
                     {
