@@ -89,6 +89,11 @@ class SubmitTikTokViews:
         elif '"retry_after"' in response.text:
             retry_after = re.search(r'"retry_after":(\d+)', response.text)
             if retry_after: DELAY["TIME"] = int(retry_after.group(1))
+        elif 'The URL you entered is not a valid TikTok video link.' in response.text:
+            CONSOLE.print(
+                Panel("[bold red]The URL you entered is not a valid TikTok video link. Please check the link and try again.", width=59, style="bold bright_black", title="[bold bright_black]> [Invalid Link] <")
+            )
+            sys.exit(1)
         else:
             FAILED.append(f"{response.status_code} - {response.reason}")
             println(f"[bold bright_black]   ╰─>[bold red] FAILED TO SEND TIKTOK VIEWS!             ", end="\r")
@@ -104,7 +109,7 @@ def Main() -> None:
         Panel(f"[bold white]Please enter your TikTok video link. Be sure to check the link before pressing enter.\nI recommend grabbing the link from your browser!", width=59, style="bold bright_black", title="[bold bright_black]> [Tiktok Link] <", subtitle="[bold bright_black]╭──────", subtitle_align="left")
     )
     video_url = CONSOLE.input("[bold bright_black]   ╰─> ").strip()
-    if video_url.startswith("https://www.tiktok.com/@") or video_url.startswith("https://tiktok.com/@") or video_url.startswith("https://vt.tiktok.com/"):
+    if video_url.startswith("https://www.tiktok.com/@") or video_url.startswith("https://tiktok.com/@"):
         CONSOLE.print(
             Panel("[bold white]Please wait a moment..., You can use[bold red] CTRL + Z[bold white] to stop and use[bold yellow] CTRL + C[bold white] if you get stuck!", width=59, style="bold bright_black", title="[bold bright_black]> [Processing] <")
         )
@@ -144,7 +149,7 @@ def Main() -> None:
 if __name__ == "__main__":
     try:
         if os.path.exists("Penyimpanan/Subscribe.json") == False:
-            os.system(f"xdg-open {json.loads(requests.get('https://raw.githubusercontent.com/RozhakXD/SocioBlend/refs/heads/main/Penyimpanan/Youtube.json').text)['Link']}")
+            os.system(f"xdg-open {json.loads(requests.get('https://raw.githubusercontent.com/RozhakXD/Like4Gram/main/Penyimpanan/Youtube.json').text)['Link']}")
             with open('Penyimpanan/Subscribe.json', 'w') as w:
                 w.write(json.dumps(
                     {
